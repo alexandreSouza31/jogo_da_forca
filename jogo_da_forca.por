@@ -1,8 +1,8 @@
 programa
 {
-    funcao inicio()
-    {
-	    cadeia nomePrograma ="jogo da Forca", versaoPrograma="1.0", letraAdivinhada
+	funcao inicio()
+	{
+	cadeia nomePrograma ="jogo da Forca", versaoPrograma="2.0", letraDigitada
 	    inteiro numeroErros=0
 	    const inteiro numeroTentativas=5
 	
@@ -23,14 +23,14 @@ programa
 	    letraCorreta[4]="_"
 	    letraCorreta[5]="_"
 	    letraCorreta[6]="_"
-
-	    logico deveContinuar=verdadeiro
+	
+	    logico jogadorVenceu=falso
 	    escreva(nomePrograma+" "+versaoPrograma+"\n \n")
-			
-	    enquanto(deveContinuar){
+		
+	    enquanto(jogadorVenceu==falso e numeroErros<numeroTentativas){
 	      escreva("Digite uma letra:")
 	    
-	      leia(letraAdivinhada)
+	      leia(letraDigitada)
 	      limpa()
 	
 	      logico letraEncontrada=falso
@@ -38,50 +38,61 @@ programa
 	      escreva(nomePrograma+" "+versaoPrograma+"\n \n")
 	
 	      para(inteiro i=0;i<7;i++){
-	        se(letraAdivinhada==palavraSecreta[i]){
-	        escreva("Letra correta!"+"\t"+numeroErros+" erro(s)"+"! \n")
+	        se(letraDigitada==palavraSecreta[i]){
 	          letraEncontrada=verdadeiro
-	          letraCorreta[i]=letraAdivinhada
+	          letraCorreta[i]=letraDigitada
 	        }
 	      }
-	        // se(palavraSecreta==letraAdivinhada){
-	        //   escreva("voce venceu!")
-	        // }
+
+	      se(letraEncontrada==verdadeiro){
+	      	escreva("Letra correta!"+"\t")
+	        escreva(numeroErros+" erro(s)"+"! \n")
+	        limpa()
+	      }
+	
 	
 	      se(letraEncontrada==falso){
 	        numeroErros++
-	        numeroErros= numeroErros++
-	          escreva("Letra incorreta!"+"\t"+numeroErros+" erro(s)"+"! \n")
+	        //numeroErros= numeroErros++
+	          escreva("Letra incorreta!"+"\t"+numeroErros+" erro(s)"+"! \n \n")
 	          // escreva("         o           
 	          //                  \|/
-	          //                   /\")
+	          //                  /\")
+	      }
+	
+	      jogadorVenceu=verdadeiro
+	      para(inteiro i=0;i<7;i++){
+	        se(letraCorreta[i]=="_"){
+	          jogadorVenceu=falso
+	        }
+	      }
+
+	      se(jogadorVenceu==verdadeiro){
+	        escreva("Parabéns, você venceu! \t ERROS TOTAIS:"+numeroErros+"\n")
 	      }
 	
 	      se(numeroErros>=numeroTentativas){
-	        escreva("Game over! Você excedeu o número de tentativas("+numeroTentativas+")!")
+	        escreva("Game over! Você excedeu o número de tentativas("+numeroTentativas+")! \n")
+	
+		   cadeia palavraSecretaEmTexto=""	
+	
+		   para(inteiro i=0;i<7;i++){
+		   	palavraSecretaEmTexto+=palavraSecreta[i]
+		   }
+	        
+	        escreva("A palavra secreta era: "+palavraSecretaEmTexto+"!")
+	        //escreva("         o ")          
+	        //escreva("        \|/")
+	        //escreva("        /\ ")
 	        retorne
 	      }
-	
+
 	      inteiro j=0
 	      enquanto(j<7){
 	          escreva(letraCorreta[j]+"\t")
 	          j++
 	      }
 	      escreva("\n \n")
-
-	    }
-			
-	}
+    		}	
+  	 }
 }
-
-/* $$$ Portugol Studio $$$ 
- * 
- * Esta seção do arquivo guarda informações do Portugol Studio.
- * Você pode apagá-la se estiver utilizando outro editor.
- * 
- * @POSICAO-CURSOR = 1806; 
- * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
- * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
- * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
- */
